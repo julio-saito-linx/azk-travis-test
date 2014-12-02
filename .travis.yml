@@ -12,7 +12,6 @@ install:
   - sudo apt-get install -y slirp lxc lxc-docker aufs-tools cgroup-lite
   - sudo groupadd docker -f
   - sudo gpasswd -a ${USER} docker
-  - sudo service docker restart
   - sudo apt-key adv --keyserver keys.gnupg.net --recv-keys 022856F6D78159DF43B487D5C82CF0628592D2C9
   - echo "deb [arch=amd64] http://repo.azukiapp.com trusty main" | sudo tee /etc/apt/sources.list.d/azuki.list
   - sudo apt-get update
@@ -20,7 +19,9 @@ install:
 
 script:
   - echo $USER
-  - sudo service docker restart
+  - sudo service docker start
+  - sudo docker ps
+  - docker ps
   - azk version
   - azk agent start
   - azk shell package -c 'bash ./package-creation/01-run-slow-tests.sh'
