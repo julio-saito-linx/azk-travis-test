@@ -69,10 +69,13 @@ whoami
 
 docker ps
 
+make
+
 azk version
 
 export AZK_DEBUG=debug
 
-azk agent start
 
-azk shell package -c 'bash ./package-creation/01-run-slow-tests.sh'
+bin/azk agent start
+
+bin/azk shell package -c 'bash ./package-creation/01-run-slow-tests.sh'
