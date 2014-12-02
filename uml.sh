@@ -65,13 +65,13 @@ sleep 5
 # Use docker
 # docker run ubuntu /bin/echo hello world
 
+echo $USER
+
 docker ps
 
 azk version
 
 export AZK_DEBUG=debug
-
-/sbin/ip -o addr show
 
 azk agent start
 
