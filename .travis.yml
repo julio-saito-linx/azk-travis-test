@@ -9,7 +9,7 @@ install:
   - echo exit 101 | sudo tee /usr/sbin/policy-rc.d
   - sudo chmod +x /usr/sbin/policy-rc.d
   - sudo apt-get install -y slirp lxc lxc-docker aufs-tools cgroup-lite
-  - sudo groupadd docker
+  - sudo groupadd docker -f
   - sudo gpasswd -a ${USER} docker
   - sudo service docker restart
   - sudo apt-key adv --keyserver keys.gnupg.net --recv-keys 022856F6D78159DF43B487D5C82CF0628592D2C9
