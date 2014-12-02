@@ -65,7 +65,7 @@ sleep 5
 # Use docker
 # docker run ubuntu /bin/echo hello world
 
-echo $USER
+whoami
 
 docker ps
 
