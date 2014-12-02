@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Exit on first error
-set -e
+set -ev
 
 
 save_and_shutdown() {
@@ -68,6 +68,10 @@ sleep 5
 docker ps
 
 azk version
+
+export AZK_DEBUG=debug
+
+/sbin/ip -o addr show
 
 azk agent start
 
