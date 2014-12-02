@@ -10,6 +10,8 @@ install:
   - echo exit 101 | sudo tee /usr/sbin/policy-rc.d
   - sudo chmod +x /usr/sbin/policy-rc.d
   - sudo apt-get install -y slirp lxc lxc-docker aufs-tools cgroup-lite
+  - curl -sLo linux https://github.com/jpetazzo/sekexe/raw/master/uml
+  - chmod +x linux
   - sudo groupadd docker -f
   - sudo gpasswd -a ${USER} docker
   - sudo apt-key adv --keyserver keys.gnupg.net --recv-keys 022856F6D78159DF43B487D5C82CF0628592D2C9
@@ -18,6 +20,7 @@ install:
   - sudo apt-get install azk
 
 script:
+  - ./linux quiet mem=2G rootfstype=hostfs rw eth0=slirp,,/usr/bin/slirp-fullbolt init=$(pwd)/uml.sh WORKDIR=$(pwd) HOME=$HOME
   - echo $USER
   - sudo service docker start
   - sudo docker ps
