@@ -21,10 +21,3 @@ install:
 
 script:
   - ./linux quiet mem=2G rootfstype=hostfs rw eth0=slirp,,/usr/bin/slirp-fullbolt init=$(pwd)/uml.sh WORKDIR=$(pwd) HOME=$HOME
-  - echo $USER
-  - sudo service docker start
-  - sudo docker ps
-  - docker ps
-  - azk version
-  - azk agent start
-  - azk shell package -c 'bash ./package-creation/01-run-slow-tests.sh'
