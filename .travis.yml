@@ -1,0 +1,28 @@
+language: node_js
+
+node_js:
+  - "0.10"
+
+notifications:
+  email:
+    - saitodisse@gmail.com
+
+install:
+  - [ -e /usr/lib/apt/methods/https ] || { apt-get update; apt-get install apt-transport-https; }
+  - sudo sh -c "echo deb https://get.docker.com/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
+  - sudo apt-get update
+  - sudo apt-get install lxc-docker
+  - sudo apt-get install azk
+  - sudo apt-key adv --keyserver keys.gnupg.net \
+    --recv-keys 022856F6D78159DF43B487D5C82CF0628592D2C9
+
+  - echo "deb [arch=amd64] http://repo.azukiapp.com trusty main" | \
+    sudo tee /etc/apt/sources.list.d/azuki.list
+
+  - sudo apt-get update
+  - sudo apt-get install azk
+
+  - ./package-creation/02-creating-linux-packages.sh
+
+script:
+  - azk shell package -c 'bash ./package-creation/11-package-deb-12.sh'
