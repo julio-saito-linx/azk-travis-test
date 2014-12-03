@@ -20,3 +20,8 @@ install:
 
 script:
   - ./linux quiet mem=2G rootfstype=hostfs rw eth0=slirp,,/usr/bin/slirp-fullbolt init=$(pwd)/uml.sh WORKDIR=$(pwd) HOME=$HOME
+  - make
+  - bin/azk version
+  - export AZK_DEBUG=debug
+  - bin/azk agent start
+  - bin/azk shell package -c 'bash ./package-creation/01-run-slow-tests.sh'
