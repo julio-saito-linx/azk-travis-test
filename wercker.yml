@@ -59,14 +59,20 @@ build:
         code: |
           bash ./package-creation/00-wait-agent-to-start.sh
 
-    - script:
-        name: show agent status
-        code: |
-          echo "azk agent status:"
-          cat azk-agent-start.log
+    # - script:
+    #     name: show agent status
+    #     code: |
+    #       echo "azk agent status:"
+    #       cat azk-agent-start.log
 
     - script:
-        name: 01- run-slow-tests
+        name: azk nvm grunt slow_test
         code: |
           bin/azk nvm grunt slow_test
+
+    - script:
+        name: making linux packages
+        code: |
+          make package_deb
+          make package_rpm
 
