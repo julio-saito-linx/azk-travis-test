@@ -24,7 +24,7 @@ build:
           echo "nameserver 172.17.42.1:53" | sudo tee -a /etc/resolver/azk.dev
 
     - script:
-        name: make: compile azk
+        name: make
         code: |
           make
 
