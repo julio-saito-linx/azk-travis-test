@@ -88,5 +88,5 @@ build:
           export VERSION=0.7.1
           bin/azk shell package -c "pwd"
           bin/azk shell package -c "ls -la"
-          bin/azk shell package -c "./package-creation/21-package-deb-12.sh" -e AZK_VERSION=$VERSION
+          bin/azk shell package -c "/azk/build/package-creation/21-package-deb-12.sh" -e AZK_VERSION=$VERSION
 
