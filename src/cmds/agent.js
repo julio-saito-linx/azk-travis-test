@@ -102,7 +102,10 @@ class Cmd extends Command {
           pipe.write(buff);
         })
         .then((result) => { return 0; })
-        .fail(() => { process.stdin.pause(); });
+        .fail((err) => {
+          log.error('stop error' + err.stack || err);
+          process.stdin.pause();
+        });
     });
   }
 
