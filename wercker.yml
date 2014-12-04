@@ -17,6 +17,13 @@ build:
           sudo apt-get install libnss-resolver -y
 
     - script:
+        name: /etc/resolver/azk.dev
+        code: |
+          sudo mkdir -p /etc/resolver
+          sudo touch /etc/resolver/azk.dev
+          echo "nameserver 172.17.42.1:53" | sudo tee -a /etc/resolver/azk.dev
+
+    - script:
         name: docker version
         code: |
           docker -v
