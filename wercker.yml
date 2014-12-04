@@ -44,11 +44,6 @@ build:
           export AZK_DEBUG=debug
           bin/azk version
 
-    # - script:
-    #     name: azk agent start
-    #     code: |
-    #       bin/azk agent start
-
     - script:
         name: azk agent start
         code: |
@@ -60,21 +55,15 @@ build:
           bash ./package-creation/00-wait-agent-to-start.sh
 
     # - script:
-    #     name: show agent status
+    #     name: download some docker images
     #     code: |
-    #       echo "azk agent status:"
-    #       cat azk-agent-start.log
+    #       docker pull azukiapp/fpm
+    #       docker pull azukiapp/azktcl:0.0.2
 
-    - script:
-        name: download some docker images
-        code: |
-          docker pull azukiapp/fpm
-          docker pull azukiapp/azktcl:0.0.2
-
-    - script:
-        name: azk nvm grunt slow_test
-        code: |
-          bin/azk nvm grunt slow_test
+    # - script:
+    #     name: azk nvm grunt slow_test
+    #     code: |
+    #       bin/azk nvm grunt slow_test
 
     - script:
         name: making linux packages
@@ -82,14 +71,12 @@ build:
           make package_deb
           make package_rpm
 
-    - script:
-        name: package-deb
-        code: |
-          export VERSION=0.7.1
-          bin/azk shell package -c "pwd"
-          bin/azk shell package -c "ls -la"
-          bin/azk shell package -c "ls -la /azk/build/package"
-          bin/azk shell package -c "ls -la /azk/build/package/deb"
-          bin/azk shell package -c "ls -la /azk/build/package/rpm"
-          bin/azk shell package -c "/azk/build/package-creation/21-package-deb-12.sh" -e AZK_VERSION=$VERSION
+    # - script:
+    #     name: package-deb
+    #     code: |
+    #       export VERSION=0.7.1
+    #       bin/azk shell package -c "pwd"
+    #       bin/azk shell package -c "ls -la"
+    #       bin/azk shell package -c "ls -la /azk/build/package"
+    #       bin/azk shell package -c "/azk/build/package-creation/21-package-deb-12.sh" -e AZK_VERSION=$VERSION
 
