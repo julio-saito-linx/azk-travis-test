@@ -9,6 +9,9 @@ build:
     - script:
         name: install libnss-resolver
         code: |
+          sudo apt-key adv --keyserver keys.gnupg.net --recv-keys 022856F6D78159DF43B487D5C82CF0628592D2C9
+          echo "deb [arch=amd64] http://repo.azukiapp.com trusty main" | sudo tee /etc/apt/sources.list.d/azuki.list
+          sudo apt-get update -y
           sudo apt-get install libnss-resolver -y
     - script:
         name: docker version
