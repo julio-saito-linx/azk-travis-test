@@ -44,10 +44,20 @@ build:
           export AZK_DEBUG=debug
           bin/azk version
 
+    # - script:
+    #     name: azk agent start
+    #     code: |
+    #       bin/azk agent start
+
     - script:
-        name: azk agent start
+        name: azk agent start --no-daemon &
         code: |
-          bin/azk agent start
+          bin/azk agent start --no-daemon &
+
+    - script:
+        name: sleep 10
+        code: |
+          sleep 10
 
     - script:
         name: 01-run-slow-tests.sh
