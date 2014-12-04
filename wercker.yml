@@ -50,17 +50,23 @@ build:
     #       bin/azk agent start
 
     - script:
-        name: azk agent start --no-daemon &
+        name: azk agent start
         code: |
-          bin/azk agent start --no-daemon &
+          bin/azk agent start --no-daemon > azk-agent-start.log 2>&1 &
 
     - script:
-        name: 00-wait-agent-to-start.sh
+        name: 00- wait-agent-to-start
         code: |
           bash ./package-creation/00-wait-agent-to-start.sh
 
     - script:
-        name: 01-run-slow-tests.sh
+        name: show agent status
+        code: |
+          echo "azk agent status:"
+          cat azk-agent-start.log
+
+    - script:
+        name: 01- run-slow-tests
         code: |
           bin/azk shell package -c 'bash ./package-creation/01-run-slow-tests.sh'
 
