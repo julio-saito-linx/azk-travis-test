@@ -2,6 +2,27 @@ box: wercker-labs/docker
 build:
   steps:
     - script:
+        name: configure Docker 1.2.0
+        code: |
+          sudo groupadd docker -f
+          sudo gpasswd -a ${USER} docker
+    - script:
+        name: install libnss-resolver
+        code: |
+          sudo apt-get install libnss-resolver -y
+    - script:
         name: docker version
         code: |
           docker -v
+    - script:
+        name: docker processes
+        code: |
+          docker ps
+    - script:
+        name: make
+        code: |
+          make
+    - script:
+        name: azk version
+        code: |
+          bin/azk version
