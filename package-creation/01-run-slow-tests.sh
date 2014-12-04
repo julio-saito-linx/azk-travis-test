@@ -2,7 +2,8 @@
 set -ev
 
 # clean lib folder
-sudo rm -Rf node_modules lib/azk lib/nvm lib/spec
+# node_modules
+sudo rm -Rf lib/azk lib/nvm lib/spec
 
 # compile azk
 make

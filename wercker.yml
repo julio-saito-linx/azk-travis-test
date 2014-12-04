@@ -68,6 +68,5 @@ build:
     - script:
         name: 01- run-slow-tests
         code: |
-          bin/azk shell package -c 'bash ./package-creation/01-run-slow-tests.sh'
-
+          bin/azk nvm grunt slow_test
 
