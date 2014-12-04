@@ -1,11 +1,13 @@
 box: wercker-labs/docker
 build:
   steps:
+
     - script:
         name: configure Docker 1.2.0
         code: |
           sudo groupadd docker -f
           sudo gpasswd -a ${USER} docker
+
     - script:
         name: install libnss-resolver
         code: |
@@ -13,19 +15,36 @@ build:
           echo "deb [arch=amd64] http://repo.azukiapp.com trusty main" | sudo tee /etc/apt/sources.list.d/azuki.list
           sudo apt-get update -y
           sudo apt-get install libnss-resolver -y
+
     - script:
         name: docker version
         code: |
           docker -v
+
     - script:
         name: docker processes
         code: |
           docker ps
+
     - script:
         name: make
         code: |
           make
+
     - script:
         name: azk version
         code: |
+          export AZK_DEBUG=debug
           bin/azk version
+
+    - script:
+        name: azk agent start
+        code: |
+          bin/azk agent start
+
+    - script:
+        name: 01-run-slow-tests.sh
+        code: |
+          bin/azk shell package -c 'bash ./package-creation/01-run-slow-tests.sh'
+
+
