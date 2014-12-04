@@ -66,6 +66,12 @@ build:
     #       cat azk-agent-start.log
 
     - script:
+        name: download some docker images
+        code: |
+          docker pull azukiapp/fpm
+          docker pull azukiapp/azktcl:0.0.2
+
+    - script:
         name: azk nvm grunt slow_test
         code: |
           bin/azk nvm grunt slow_test
@@ -79,7 +85,6 @@ build:
     - script:
         name: package-deb
         code: |
-          docker pull azukiapp/fpm
           export VERSION=0.7.1
           export DISTRO=precise
           export REPO=azk-${DISTRO}
