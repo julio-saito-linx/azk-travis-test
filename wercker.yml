@@ -24,24 +24,14 @@ build:
           echo "nameserver 172.17.42.1:53" | sudo tee -a /etc/resolver/azk.dev
 
     - script:
-        name: docker version
-        code: |
-          docker -v
-
-    - script:
-        name: docker processes
-        code: |
-          docker ps
-
-    - script:
-        name: make
+        name: make: compile azk
         code: |
           make
 
     - script:
-        name: azk version
+        name: versions
         code: |
-          export AZK_DEBUG=debug
+          docker -v
           bin/azk version
 
     - script:
@@ -50,33 +40,16 @@ build:
           bin/azk agent start --no-daemon > azk-agent-start.log 2>&1 &
 
     - script:
-        name: 00- wait-agent-to-start
+        name: wait agent to start
         code: |
-          bash ./package-creation/00-wait-agent-to-start.sh
-
-    # - script:
-    #     name: download some docker images
-    #     code: |
-    #       docker pull azukiapp/fpm
-    #       docker pull azukiapp/azktcl:0.0.2
-
-    # - script:
-    #     name: azk nvm grunt slow_test
-    #     code: |
-    #       bin/azk nvm grunt slow_test
+          until bin/azk status; do sleep 1; done
 
     - script:
-        name: making linux packages
+        name: download azktcl
         code: |
-          make package_deb
-          make package_rpm
+          docker pull azukiapp/azktcl:0.0.2
 
-    # - script:
-    #     name: package-deb
-    #     code: |
-    #       export VERSION=0.7.1
-    #       bin/azk shell package -c "pwd"
-    #       bin/azk shell package -c "ls -la"
-    #       bin/azk shell package -c "ls -la /azk/build/package"
-    #       bin/azk shell package -c "/azk/build/package-creation/21-package-deb-12.sh" -e AZK_VERSION=$VERSION
-
+    - script:
+        name: run all slow tests
+        code: |
+          bin/azk nvm grunt slow_test
