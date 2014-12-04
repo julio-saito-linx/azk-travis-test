@@ -5,7 +5,7 @@ export DISTRO=fedora20
 rm -Rf package/${DISTRO}
 mkdir -p package/${DISTRO}/packages
 # copia os arquivos para a pasta
-cp -Rf package/rpm/* package/${DISTRO}/packages
+cp -Rf /azk/build/package/rpm/* /azk/build/package/${DISTRO}/packages
 
 # importando assinaturas
 echo "%_signature gpg" > ~/.rpmmacros
