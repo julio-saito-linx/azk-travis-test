@@ -76,3 +76,14 @@ build:
           make package_deb
           make package_rpm
 
+    - script:
+        name: package-deb
+        code: |
+          docker pull azukiapp/fpm
+          export VERSION=0.7.1
+          export DISTRO=precise
+          export REPO=azk-${DISTRO}
+          bin/azk shell package -c 'pwd'
+          bin/azk shell package -c 'ls -la'
+          bin/azk shell package -c 'bash package-creation/21-package-deb-12.sh' -e AZK_VERSION=$AZK_VERSION
+
